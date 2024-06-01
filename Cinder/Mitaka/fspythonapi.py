@@ -16,13 +16,13 @@
 """
  Volume api for FusionStorage systems.
 """
-import random
 import re
 import subprocess
 import time
 from oslo_log import log as logging
 
 from cinder import utils
+import secrets
 
 LOG = logging.getLogger(__name__)
 fsc_cli = "fsc_cli"
@@ -202,7 +202,7 @@ class FSPythonApi(object):
     def start_execute_cmd(self, cmd, type_flag):
         fsc_ip = self.get_ip_port()
         ip_num = len(fsc_ip)
-        random.shuffle(fsc_ip)
+        secrets.SystemRandom().shuffle(fsc_ip)
         if ip_num <= 0:
             return None
         ip_list = []
@@ -229,7 +229,7 @@ class FSPythonApi(object):
     def start_execute_cmd_to_all(self, cmd):
         fsc_ip = self.get_ip_port()
         ip_num = len(fsc_ip)
-        random.shuffle(fsc_ip)
+        secrets.SystemRandom().shuffle(fsc_ip)
         if ip_num <= 0:
             return None
         ip_list = []

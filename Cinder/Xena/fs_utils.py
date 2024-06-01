@@ -16,7 +16,6 @@
 import datetime
 import hashlib
 import ipaddress
-import random
 import time
 
 import pytz
@@ -32,6 +31,7 @@ from cinder import objects
 from cinder.volume.drivers.fusionstorage import constants
 from cinder.volume import qos_specs
 from cinder.volume import volume_types
+import secrets
 
 
 LOG = logging.getLogger(__name__)
@@ -684,7 +684,7 @@ def format_target_portal(portal):
 
 
 def _get_manager_ips(manager_groups):
-    index = random.randint(0, len(manager_groups) - 1)
+    index = secrets.SystemRandom().randint(0, len(manager_groups) - 1)
     manager_group = manager_groups.pop(index)
 
     manager_ips = manager_group.strip().split(";")
