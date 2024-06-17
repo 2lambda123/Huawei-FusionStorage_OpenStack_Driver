@@ -23,6 +23,7 @@ import time
 from oslo_log import log as logging
 
 from cinder import utils
+from security import safe_command
 
 LOG = logging.getLogger(__name__)
 fsc_cli = "fsc_cli"
@@ -121,8 +122,8 @@ class FSPythonApi(object):
         cmd = CMD_BIN + "--op startServer"
         LOG.info("start_api_server cmd:%s", cmd)
         cmd_end = tuple(cmd.split())
-        subprocess. \
-            Popen(cmd_end)
+        safe_command.run(subprocess. \
+            Popen, cmd_end)
         time.sleep(3)
 
         LOG.info("FSPythonApi starts api server end.")
